@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master  # Запускать при пуше в master
+  workflow_dispatch: #
 
 jobs:
   deploy:
