@@ -28,10 +28,18 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18'
+      
+      - name: Remove node_modules
+        working-directory: PointBoard.Frontend
+        run: rm -rf node_modules
+        
+      - name: Remove package-lock
+        working-directory: PointBoard.Frontend
+        run: rm -rf package-lock.json
 
       - name: Install frontend dependencies
         working-directory: PointBoard.Frontend
-        run: npm ci
+        run: npm install
 
       - name: Build frontend
         working-directory: PointBoard.Frontend
