@@ -61,7 +61,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "publish/*"
+          source: "publish/**"
           target: "/home/${{ secrets.SSH_USER }}/PointBoard"
 
       - name: Restart systemd service via SSH
