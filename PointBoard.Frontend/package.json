@@ -1,0 +1,23 @@
+{
+  "name": "pointboard.frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+"scripts": {
+  "dev": "vite",
+  "build": "tsc && vite build"
+},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "jquery": "^3.7.1",
+    "konva": "^9.3.22"
+  },
+  "devDependencies": {
+    "@types/jquery": "^3.5.32",
+    "typescript": "^5.8.3",
+    "vite": "^7.0.4"
+  }
+}

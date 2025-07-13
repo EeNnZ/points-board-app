@@ -1,0 +1,65 @@
+name: Build and Deploy to VPS
+
+on:
+  push:
+    branches:
+      - master  # Запускать при пуше в master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '6.0.x'
+      
+      - name: Restore dependencies
+        run: dotnet restore
+        
+      - name: Run backend tests
+        run: dotnet test PointBoard.Tests/PointBoard.Tests.csproj --verbosity normal
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install frontend dependencies
+        working-directory: PointBoard.Frontend
+        run: npm ci
+
+      - name: Build frontend
+        working-directory: PointBoard.Frontend
+        run: npm run build
+
+      - name: Copy frontend dist/ to backend wwwroot/
+        run: |
+          rm -rf PointBoard.Host/wwwroot
+          mkdir PointBoard.Host/wwwroot
+          cp -r PointBoard.Frontend/dist/* PointBoard.Host/wwwroot/
+
+      - name: Publish .NET project
+        run: dotnet publish PointBoard.Host/PointBoard.Host.csproj -c Release -o publish
+
+      - name: Copy files to VPS via SCP
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: "publish/*"
+          target: "/home/${{ secrets.SSH_USER }}/PointBoard"
+
+      - name: Restart systemd service via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            sudo systemctl restart PointBoard

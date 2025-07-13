@@ -1,0 +1,92 @@
+#commentText,
+#editPointSelect,
+#editPointRadius {
+  width: 100%;
+}
+#editPointSelect {
+  margin-bottom: 10px;
+}
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: #fafbfc;
+}
+
+#control-panel {
+  width: 100%;
+  background: rgba(255,255,255,0.95);
+  padding: 16px 32px 12px 32px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: static;
+  z-index: 1;
+}
+
+#container {
+  flex: 1 1 auto;
+  margin: 24px 32px 32px 32px;
+  border: 2px solid #0f375e;
+  border-radius: 10px;
+  background: #fff;
+  position: relative;
+  min-height: 300px;
+  min-width: 0;
+  box-shadow: 0 2px 12px rgba(25, 118, 210, 0.07);
+  transition: box-shadow 0.2s;
+  overflow: auto;
+  display: block;
+}
+
+.modal {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -20%);
+  background: white;
+  border: 1px solid #ccc;
+  padding: 20px;
+  z-index: 1000;
+  display: none;
+  width: 400px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0, 0, 0, 0.3);
+  display: none;
+  z-index: 999;
+}
+
+.comment-list {
+  max-height: 150px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+
+.comment-item {
+  background: #f4f4f4;
+  margin-bottom: 5px;
+  padding: 5px;
+  border-left: 4px solid #999;
+}
+
+#editPointSelect, #editPointRadius, #commentText {
+  width: 100%;
+  margin-bottom: 10px;
+}

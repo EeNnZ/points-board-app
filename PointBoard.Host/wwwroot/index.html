@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Point Manager</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script type="module" crossorigin src="/assets/index-CaKHpEYD.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-Bdm8S411.css">
+</head>
+<body>
+
+<!-- Верхняя панель управления -->
+<div id="control-panel">
+    <button id="add-point-btn">Добавить точку</button>
+    <button id="edit-point-btn">Редактировать точку</button>
+</div>
+
+<!-- Контейнер для точек -->
+<div id="container"></div>
+
+<!-- Модальное окно -->
+<div class="overlay" id="overlay"></div>
+<div class="modal" id="commentModal">
+    <h3>Комментарии</h3>
+    <div class="comment-list" id="commentList"></div>
+
+    <form id="commentForm">
+        <label>Текст:</label><br/>
+        <input type="text" id="commentText" required placeholder="Введите комментарий"
+               title="Текст комментария"/><br/><br/>
+        <label>Цвет:</label><br/>
+        <input type="color" id="commentColor" value="#cccccc" title="Цвет комментария"/><br/><br/>
+        <button type="submit">Добавить</button>
+        <button type="button" id="closeModal">Закрыть</button>
+    </form>
+</div>
+
+<!-- Модальное окно для редактирования точки -->
+<div class="overlay" id="editPointOverlay"></div>
+<div class="modal" id="editPointModal">
+    <h3>Редактировать точку</h3>
+    <form id="editPointForm">
+        <label>Выберите точку:</label><br/>
+        <select id="editPointSelect" required title="Выберите точку"></select><br/>
+        <label>Цвет:</label><br/>
+        <input type="color" id="editPointColor" value="#00aaff" title="Цвет точки"/><br/><br/>
+        <label>Радиус:</label><br/>
+        <input type="number" id="editPointRadius" min="1" max="100" value="20" title="Радиус точки"/><br/><br/>
+        <button type="submit">Сохранить</button>
+        <button type="button" id="closeEditPointModal">Закрыть</button>
+    </form>
+</div>
+
+
+</body>
+</html>
